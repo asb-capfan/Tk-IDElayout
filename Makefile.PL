@@ -158,7 +158,7 @@ perlmain.c : config Makefile
 basic      : $(INST_DYNAMIC) pm_to_blib
 
 MANIFEST : MANIFEST.SKIP $(FIRST_MAKEFILE)
-    $(MAKE) manifest
+	$(MAKE) manifest
 
 ';
 }
