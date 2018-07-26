@@ -12,7 +12,7 @@ our($DEBUG);
 
 =head1 NAME 
 
-Tk::IDEdragDrop - Tk::DragDrop subclass for IDE Drag/Drop Behavoir
+Tk::IDEdragDrop - Tk::DragDrop subclass for IDE Drag/Drop Behavior
 
 =head1 DESCRIPTION
 
