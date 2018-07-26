@@ -22,7 +22,7 @@ BEGIN {
         print "####  This module requires a Tk installation                           ###\n";
 
         # Write out a simple makefile with PREREQ_PM, so CPAN will at least detect our
-        #   prerequesites.
+        #   prerequisites.
         WriteMakefile(
             'VERSION_FROM'  => 'IDElayout.pm',
             'NAME'     => 'Tk::IDElayout',
