@@ -182,7 +182,7 @@ real object in this hash.
 =cut
 
 package Tk::IDEtabFrame;
-our ($VERSION) = ('0.33');
+our ($VERSION) = ('0.34');
 
 use Carp;
 use strict;
