@@ -27,6 +27,18 @@ BEGIN {
             'VERSION_FROM'  => 'IDElayout.pm',
             'NAME'     => 'Tk::IDElayout',
             'DISTNAME' => "Tk-IDElayout",
+            # XXX: duplicated below in TkExtMakefile()
+            'LICENSE'  => 'perl_5',
+            'META_MERGE' => {
+                'meta-spec' => { version => 2 },
+                resources => {
+                    repository => {
+                        type => 'git',
+                        url => 'https://github.com/asb-capfan/Tk-IDElayout.git',
+                        web => 'https://github.com/asb-capfan/Tk-IDElayout',
+                    },
+                },
+            },
             'PREREQ_PM'  => { Tk => 804.027, Tk::DynaTabFrame => 0.23, Graph => 0.20105}
             );
         exit();
@@ -78,6 +90,18 @@ Tk::MMutil::TkExtMakefile(
     'XS_VERSION' => $VERSION,
     'EXE_FILES' => [],
     'NAME'     => 'Tk::CaptureRelease',
+    # XXX: duplicated from WriteMakefile() above.
+    'LICENSE'  => 'perl_5',
+    'META_MERGE' => {
+        'meta-spec' => { version => 2 },
+        resources => {
+            repository => {
+                type => 'git',
+                url => 'https://github.com/asb-capfan/Tk-IDElayout.git',
+                web => 'https://github.com/asb-capfan/Tk-IDElayout',
+            },
+        },
+    },
     'DIR'      => [reverse(sort(keys %$dir))],
     'DISTNAME' => "Tk-IDElayout",
     'DEFINE'   => $mydefine,
