@@ -31,6 +31,9 @@ BEGIN {
             'LICENSE'  => 'perl_5',
             'META_MERGE' => {
                 'meta-spec' => { version => 2 },
+                no_index => {
+                    'package' => [ 'Tk', 'Tk::CaptureRelease' ],
+                },
                 resources => {
                     repository => {
                         type => 'git',
@@ -94,6 +97,9 @@ Tk::MMutil::TkExtMakefile(
     'LICENSE'  => 'perl_5',
     'META_MERGE' => {
         'meta-spec' => { version => 2 },
+        no_index => {
+            'package' => [ 'Tk', 'Tk::CaptureRelease' ],
+        },
         resources => {
             repository => {
                 type => 'git',
