@@ -42,7 +42,7 @@ BEGIN {
                     },
                 },
             },
-            'PREREQ_PM'  => { Tk => 804.027, Tk::DynaTabFrame => 0.23, Graph => 0.20105}
+            'PREREQ_PM'  => { Tk => 804.027, 'Tk::DynaTabFrame' => 0.23, Graph => 0.20105}
             );
         exit();
     }
@@ -114,7 +114,7 @@ Tk::MMutil::TkExtMakefile(
     'INC'    => "-I$ptkPath",
     'LIBS'    => \@libs,
      'OBJECT'  => '$(O_FILES)'. " $TkLibPath", # Tk Lib path will be the Tk library on Unix, blank for win32
-    'PREREQ_PM'  => { Tk => 804.027, Tk::DynaTabFrame => 0.23, Graph => 0.20105},
+    'PREREQ_PM'  => { Tk => 804.027, 'Tk::DynaTabFrame' => 0.23, Graph => 0.20105},
     @macro
 );
 
