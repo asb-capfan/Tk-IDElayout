@@ -18,8 +18,8 @@ BEGIN {
 
     eval{ require "./myConfig"; };
     if( $@ ){
-        print "\n#### Error requiring 'myConfig': Perhaps you don't have Tk installed ###\n";
-        print "####  This module requires a Tk installation                           ###\n";
+        print STDERR "\n#### Error requiring 'myConfig': Perhaps you don't have Tk installed ###\n";
+        print STDERR "####  This module requires a Tk installation                           ###\n";
 
         # Write out a simple makefile with PREREQ_PM, so CPAN will at least detect our
         #   prerequisites.
