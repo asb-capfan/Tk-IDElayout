@@ -40,6 +40,9 @@ BEGIN {
                         url => 'https://github.com/asb-capfan/Tk-IDElayout.git',
                         web => 'https://github.com/asb-capfan/Tk-IDElayout',
                     },
+                    bugtracker => {
+                        web => 'https://github.com/asb-capfan/Tk-IDElayout/issues',
+                    },
                 },
             },
             'PREREQ_PM'  => { Tk => 804.027, 'Tk::DynaTabFrame' => 0.23, Graph => 0.20105}
@@ -129,6 +132,9 @@ Tk::MMutil::TkExtMakefile(
                 type => 'git',
                 url => 'https://github.com/asb-capfan/Tk-IDElayout.git',
                 web => 'https://github.com/asb-capfan/Tk-IDElayout',
+            },
+            bugtracker => {
+                web => 'https://github.com/asb-capfan/Tk-IDElayout/issues',
             },
         },
     },
