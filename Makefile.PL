@@ -4,7 +4,7 @@ use Config;
 no  lib '.';
 use ExtUtils::MakeMaker;
 BEGIN {
-    
+
     warn("### Note: 'Building Outside of Tk itself' Messages are Expected Here ####\n");
 
     $IsWin32 = ($^O eq 'MSWin32' || $Config{'ccflags'} =~ /-D_?WIN32_?/);
@@ -12,7 +12,7 @@ BEGIN {
     $VERSION = '0.37';
     $win_arch = shift @ARGV if @ARGV and $ARGV[0] =~ /^(open32|pm|x|MSWin32)$/;
     require('fix_4_os2.pl'), OS2_massage() if $^O eq 'os2';
-    
+
     # Currently 'x', 'pm', 'open32', 'MSWin32'
     $win_arch = ($IsWin32) ? 'MSWin32' : 'x' if not defined $win_arch;
 
@@ -20,7 +20,7 @@ BEGIN {
     if( $@ ){
         warn $@;
         print STDERR "\n#### Error requiring 'myConfig': Perhaps you don't have Tk installed ###\n";
-        print STDERR "####  This module requires a Tk installation                           ###\n";
+        print STDERR   "####  This module requires a Tk installation                         ###\n";
 
         # Write out a simple makefile with PREREQ_PM, so CPAN will at least detect our
         #   prerequisites.
@@ -46,8 +46,12 @@ BEGIN {
                     },
                 },
             },
-            'PREREQ_PM'  => { Tk => 804.027, 'Tk::DynaTabFrame' => 0.23, Graph => 0.20105}
-            );
+            'PREREQ_PM'  => {
+                'Tk' => '804.027',
+                'Tk::DynaTabFrame' => '0.23',
+                'Graph' => '0.20105',
+            },
+        );
         exit();
     }
 
@@ -144,9 +148,13 @@ Tk::MMutil::TkExtMakefile(
     'DEFINE'   => $mydefine,
     'INC'    => "-I$ptkPath",
     'LIBS'    => \@libs,
-     'OBJECT'  => '$(O_FILES)'. " $TkLibPath", # Tk Lib path will be the Tk library on Unix, blank for win32
-    'PREREQ_PM'  => { Tk => 804.027, 'Tk::DynaTabFrame' => 0.23, Graph => 0.20105},
-    @macro
+    'OBJECT'  => '$(O_FILES)'. " $TkLibPath", # Tk Lib path will be the Tk library on Unix, blank for win32
+    'PREREQ_PM' => {
+        'Tk' => '804.027',
+        'Tk::DynaTabFrame' => '0.23',
+        'Graph' => '0.20105',
+    },
+    @macro,
 );
 
 
@@ -198,7 +206,7 @@ sub MY::test {
         @tests = grep(!needs_Test($_),@tests);
     }
     $attrib{'TESTS'} = join(' ',@tests);
-    
+
     # Temporarily remove sub-dirs from $self as we 'know'
     # there are no tests down there
     my $dir  = delete $self->{'DIR'};
@@ -223,5 +231,3 @@ MANIFEST : MANIFEST.SKIP $(FIRST_MAKEFILE)
 
 ';
 }
-
-
