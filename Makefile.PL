@@ -97,7 +97,7 @@ if ($IsWin32) {
     my $plibs = $Config{'libs'};
     my $libs  = "$xlib -lX11";   # Used to have -lpt in here as well.
     my @try   = qw(-lsocket -lnsl -lm);
-    push(@try,'-lc') if $^O =~ /svr4/i;
+    push(@try,'-lc') if $^O eq 'svr4';
     my $lib;
     # perl needs sockets and math library too
     # so only include these if they made it through perl's Configure
