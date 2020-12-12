@@ -18,6 +18,7 @@ BEGIN {
 
     eval { require './myConfig'; 1; };
     if( $@ ){
+        warn $@;
         print STDERR "\n#### Error requiring 'myConfig': Perhaps you don't have Tk installed ###\n";
         print STDERR "####  This module requires a Tk installation                           ###\n";
 
