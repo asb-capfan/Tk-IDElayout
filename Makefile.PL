@@ -49,7 +49,7 @@ BEGIN {
             'PREREQ_PM'  => {
                 'Tk' => '804.027',
                 'Tk::DynaTabFrame' => '0.23',
-                'Graph' => '0.20105',
+                'Graph' => '0.50',
             },
         );
         exit();
@@ -152,7 +152,7 @@ Tk::MMutil::TkExtMakefile(
     'PREREQ_PM' => {
         'Tk' => '804.027',
         'Tk::DynaTabFrame' => '0.23',
-        'Graph' => '0.20105',
+        'Graph' => '0.50',
     },
     @macro,
 );
