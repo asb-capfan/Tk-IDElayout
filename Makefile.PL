@@ -16,7 +16,7 @@ BEGIN {
     # Currently 'x', 'pm', 'open32', 'MSWin32'
     $win_arch = ($IsWin32) ? 'MSWin32' : 'x' if not defined $win_arch;
 
-    eval{ require "./myConfig"; };
+    eval { require './myConfig'; 1; };
     if( $@ ){
         print STDERR "\n#### Error requiring 'myConfig': Perhaps you don't have Tk installed ###\n";
         print STDERR "####  This module requires a Tk installation                           ###\n";
