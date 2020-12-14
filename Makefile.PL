@@ -9,7 +9,7 @@ BEGIN {
 
     $IsWin32 = ($^O eq 'MSWin32' || $Config{'ccflags'} =~ /-D_?WIN32_?/);
 
-    $VERSION = '0.37';
+    $VERSION = '0.37_01';
     $win_arch = shift @ARGV if @ARGV and $ARGV[0] =~ /^(open32|pm|x|MSWin32)$/;
     require('fix_4_os2.pl'), OS2_massage() if $^O eq 'os2';
 
@@ -52,7 +52,7 @@ BEGIN {
                 'Graph' => '0.50',
             },
         );
-        exit();
+        exit 1;
     }
 
   # use lib ($Tk::MMutil::dir=getcwd);
