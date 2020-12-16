@@ -361,7 +361,7 @@ The last side of the frame (e.g. left, right, top, bot) that the mouse pointer w
 
 package Tk::IDElayout;
 
-our ($VERSION) = ('0.37_01');
+our ($VERSION) = ('0.37_02');
 
 use strict;
 
