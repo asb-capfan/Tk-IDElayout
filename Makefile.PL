@@ -16,44 +16,7 @@ BEGIN {
     # Currently 'x', 'pm', 'open32', 'MSWin32'
     $win_arch = ($IsWin32) ? 'MSWin32' : 'x' if not defined $win_arch;
 
-    eval { require './myConfig'; 1; };
-    if( $@ ){
-        warn $@;
-        print STDERR "\n#### Error requiring 'myConfig': Perhaps you don't have Tk installed ###\n";
-        print STDERR   "####  This module requires a Tk installation                         ###\n";
-
-        # Write out a simple makefile with PREREQ_PM, so CPAN will at least detect our
-        #   prerequisites.
-        WriteMakefile(
-            'VERSION_FROM'  => 'IDElayout.pm',
-            'NAME'     => 'Tk::IDElayout',
-            'DISTNAME' => "Tk-IDElayout",
-            # XXX: duplicated below in TkExtMakefile()
-            'LICENSE'  => 'perl_5',
-            'META_MERGE' => {
-                'meta-spec' => { version => 2 },
-                no_index => {
-                    'package' => [ 'Tk', 'Tk::CaptureRelease' ],
-                },
-                resources => {
-                    repository => {
-                        type => 'git',
-                        url => 'https://github.com/asb-capfan/Tk-IDElayout.git',
-                        web => 'https://github.com/asb-capfan/Tk-IDElayout',
-                    },
-                    bugtracker => {
-                        web => 'https://github.com/asb-capfan/Tk-IDElayout/issues',
-                    },
-                },
-            },
-            'PREREQ_PM'  => {
-                'Tk' => '804.027',
-                'Tk::DynaTabFrame' => '0.23',
-                'Graph' => '0.50',
-            },
-        );
-        exit 1;
-    }
+    require './myConfig';
 
   # use lib ($Tk::MMutil::dir=getcwd);
 
@@ -125,7 +88,6 @@ Tk::MMutil::TkExtMakefile(
     'XS_VERSION' => $VERSION,
     'EXE_FILES' => [],
     'NAME'     => 'Tk::CaptureRelease',
-    # XXX: duplicated from WriteMakefile() above.
     'LICENSE'  => 'perl_5',
     'META_MERGE' => {
         'meta-spec' => { version => 2 },
@@ -149,6 +111,11 @@ Tk::MMutil::TkExtMakefile(
     'INC'    => "-I$ptkPath",
     'LIBS'    => \@libs,
     'OBJECT'  => '$(O_FILES)'. " $TkLibPath", # Tk Lib path will be the Tk library on Unix, blank for win32
+    'CONFIGURE_REQUIRES' => {
+        'ExtUtils::MakeMaker' => '6.52',
+        'Tk::MMtry' => 0,
+        'Tk::MMutil' => 0,
+    },
     'PREREQ_PM' => {
         'Tk' => '804.027',
         'Tk::DynaTabFrame' => '0.23',

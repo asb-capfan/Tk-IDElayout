@@ -5,6 +5,8 @@ Release 0.37_02:  2020-12-16
 * Prevent UNKNOWN reports from CPAN testers:
   - Incorporate change from Perl/Tk's myConfig:
     exit gracefully if libX11 not found
+  - specify dependencies for configure phase
+    (i.e. needed when running Makefile.PL, myConfig)
 
 Release 0.37_01:  2020-12-13
 
