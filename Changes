@@ -2,6 +2,9 @@ Summary of Changes to Tk::IDElayout
 
 Release 0.37_02:  2020-12-16
 
+* Prevent UNKNOWN reports from CPAN testers:
+  - Incorporate change from Perl/Tk's myConfig:
+    exit gracefully if libX11 not found
 
 Release 0.37_01:  2020-12-13
 
