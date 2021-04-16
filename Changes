@@ -1,6 +1,6 @@
 Summary of Changes to Tk::IDElayout
 
-Release 0.37_02:  2020-12-16
+0.37_02  2020-12-16
 
 * Prevent UNKNOWN reports from CPAN testers:
   - Incorporate change from Perl/Tk's myConfig:
@@ -8,58 +8,58 @@ Release 0.37_02:  2020-12-16
   - specify dependencies for configure phase
     (i.e. needed when running Makefile.PL, myConfig)
 
-Release 0.37_01:  2020-12-13
+0.37_01  2020-12-13
 
  * Makefile.PL: Use non-zero exit code when myConfig fails
    (trying to debug UNKNOWN reports from CPAN testers)
 
-Release 0.37:  2020-12-12
+0.37  2020-12-12
 
  * Use Graph 0.50 syntax (mandatory as of Graph 0.9712)
 
-Release 0.36_01:  2020-12-11
+0.36_01  2020-12-11
 
  * Specify GitHub issues as bugtracker
 
-Release 0.36:  2020-11-14
+0.36  2020-11-14
 
  * Fix for Darwin/macOS build:
    Avoid error caused by trying to link to Tk library in Mach-O bundle
    ("ld: can't link with bundle (MH_BUNDLE) only dylibs (MH_DYLIB) file")
 
-Release 0.35:  2020-03-09
+0.35  2020-03-09
 
  * Fix POD error (missing `=back` before `=head1`) in IDEtabFrame.pm
    (contribution from Mohammad S Anwar)
  * Makefile.PL: Don't index unauthorized packages Tk and Tk::CaptureRelease
    to avoid CPAN permission issue
 
-Release 0.34:  2018-08-02
+0.34  2018-08-02
 
  * Improved error message if widgets are missing containers needed for dropping
    (contribution from Alexander Becker)
  * Include GNU GPLv1 (not GPLv2) in LICENSE file to match Perl 5 license
  * Update CPAN META info: add GitHub repository, license
  
-Release 0.33:  2014-04-26
+0.33  2014-04-26
 
  * Fixed intermittent bug where in the populate method, the frameStructure method would get called before the -widgets
    stucture would get populated, causing errors.
 
-Release 0.32:  2008-09-18
+0.32  2008-09-18
 
  * Fixed bug where the status line would vanish if the whole window was expanded and then shrunk.
  * Updated Makefile.PL so CPAN (hopefully) will understand that Tk is required for this module.
      (Since Tk was required for just running the Makefile.PL, this was more complicated than just
       adding to PREREQ_PM.)
 
-Release 0.31:  2007-09-20
+0.31  2007-09-20
 
  * Updated to work with Graph packages greater than version .3
  * Fixed memory leak where widgets where not being destroyed after the tabs that contained
    them were closed.
 
-Release 0.3:  2007-09-16
+0.3  2007-09-16
 
  * First Public Release.
 
