@@ -5,7 +5,6 @@ die "Cannot find '$path' have you installed $^X?\n" unless (-r $path);
 print "$^X is installed in $Config{'archlibexp'} okay\n";
 use Config;
 use Cwd;
-use Tk::MMtry;
 warn "No VERSION" unless (defined $VERSION);
 
 my %define = ();
@@ -89,23 +88,6 @@ my $voidused  = $Config{'defvoidused'}+0;
 $define{'NOVOID'}  = 1 if (($voidflags & $voidused) != $voidused);
 $define{'NOCONST'} = 1 unless ($Config{'d_const'});
 
-if (try_compile("config/signedchar.c"))
- {
-  $define{'ANSI_SIGNED_CHAR'} = 1;
- }
-else
- {
-  if (try_run("config/unsigned.c"))
-   {
-    $define{'CHAR_UNSIGNED'} = 1;
-   }
- }
-
-if (!try_compile("config/Ksprintf.c") &&
-     try_compile("-DSPRINTF_RETURN_CHAR config/Ksprintf.c"))
- {
-  $define{'SPRINTF_RETURN_CHAR'} = 1;
- }
 
 #
 # Hunt down X Library - first a function

@@ -113,7 +113,6 @@ Tk::MMutil::TkExtMakefile(
     'OBJECT'  => '$(O_FILES)'. " $TkLibPath", # Tk Lib path will be the Tk library on Unix, blank for win32
     'CONFIGURE_REQUIRES' => {
         'ExtUtils::MakeMaker' => '6.52',
-        'Tk::MMtry' => 0,
         'Tk::MMutil' => 0,
     },
     'PREREQ_PM' => {
