@@ -29,3 +29,4 @@ TabsDragDemo
 testTextEdit
 WmCaptureRelease.c
 WmCaptureRelease.h
+t/deleteLastWidget.t

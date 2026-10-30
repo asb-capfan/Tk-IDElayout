@@ -1302,6 +1302,18 @@ sub deleteWidget{
         my ($pwName) = $frameStruct->predecessors($widgetName);
         
         unless( defined($pwName)){
+                # Simplification can leave the last widget packed directly in mainPW.
+                # It is a valid layout root, so there is no PanedWindow to forget it from.
+                my @vertices = $frameStruct->vertices();
+                if( @vertices == 1 && $vertices[0] eq $widgetName
+                    && exists $widgets->{$widgetName}){
+                        my $widget = $widgets->{$widgetName};
+                        $widget->packForget;
+                        $frameStruct->delete_vertex($widgetName);
+                        delete $widgets->{$widgetName};
+                        $self->adjustGeom if( $self->cget(-ResizeOnReconfig));
+                        return $widget;
+                }
                 croak("Error Can't find PanedWindow that $widgetName is in\n");
         }
         
