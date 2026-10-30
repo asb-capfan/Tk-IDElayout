@@ -129,6 +129,9 @@ Tk::MMutil::TkExtMakefile(
         'ExtUtils::MakeMaker' => '6.52',
         'Tk::MMutil' => 0,
     },
+    'TEST_REQUIRES' => {
+        'FindBin' => 0,
+    },
     'PREREQ_PM' => {
         'Tk' => '804.027',
         'Tk::DynaTabFrame' => '0.23',
