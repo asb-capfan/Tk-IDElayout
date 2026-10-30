@@ -1,3 +1,7 @@
+#!/usr/bin/env perl
+use FindBin;
+use lib "$FindBin::Bin/../blib/arch", "$FindBin::Bin/../blib/lib", "$FindBin::Bin/../lib";
+
 use Tk;
 use warnings;
 use Tk::CaptureRelease;

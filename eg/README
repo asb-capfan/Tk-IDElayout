@@ -1,0 +1,25 @@
+Examples
+========
+
+Build the extension first (from the distribution root):
+
+    perl Makefile.PL
+    make
+
+Use gmake instead of make with Strawberry Perl on Windows.
+Then run any example, for example:
+
+    perl eg/tabs-drag.pl
+
+The scripts locate the distribution's lib and blib directories themselves,
+so they also work when launched by absolute path from another directory.
+A graphical desktop is required.
+
+  tabs-drag.pl             IDE layout with draggable source-code tabs
+  capture-release.pl       Release a frame into a window and capture it again
+  drag-shadow.pl           Display and hide a drag outline inside a frame
+  drag-shadow-toplevel.pl  Drag an outline around the desktop with the mouse
+
+lib/testTextEdit.pl supplies source-code text widgets for examples and GUI tests.
+The tab demo uses only this distribution's dependencies; no instrument-control
+modules or measurement hardware are needed.

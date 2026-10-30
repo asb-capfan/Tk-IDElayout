@@ -11,7 +11,7 @@ similar to Eclipse or Microsoft Visual Studio.
 
 Features:
 
-See "Screenshots.pdf" in the source distribution for some screenshots
+See "doc/Screenshots.pdf" in the source distribution for some screenshots
 demonstrating some of these features.
 
 * Layout and management of subwidgets/frames similar to an IDE.
@@ -29,14 +29,14 @@ BUILDING AND INSTALLING THE WIDGET
 1. Uncompress and unpack the distribution
 
    ON UNIX:
-	gzip -d Tk-TableMatrix<version>.tar.gz
-	tar -xf Tk-TableMatrix<version>.tar
+	gzip -d Tk-IDElayout<version>.tar.gz
+	tar -xf Tk-IDElayout<version>.tar
 
    ON WINDOWS:
 	use something like WinZip to unpack the archive.
 
     
-   This will create a subdirectory TableMatrix<version> with all the files in it.
+   This will create a subdirectory Tk-IDElayout<version> with all the files in it.
 
 2. Build/Test
 
@@ -47,8 +47,8 @@ BUILDING AND INSTALLING THE WIDGET
     make 
     make test
     
- The test case t/simpleIDElayout2.t serves a simple demo. Run it using
-    perl -Mblib t/simpleIDElayout2.t
+ Examples are in eg/ (see eg/README). Run the main demo using
+    perl eg/tabs-drag.pl
    
 3. Install
     make install
@@ -63,3 +63,34 @@ BUILDING AND INSTALLING THE WIDGET
 This library is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
 
+
+SOURCE LAYOUT
+
+  lib/Tk/  Perl modules
+  src/     C, header and XS sources
+  t/       Automated tests and GUI integration tests
+  eg/      Runnable examples (.pl) and shared demo helper
+  doc/     Screenshots and supplementary documentation
+
+With Strawberry Perl on Windows, use gmake instead of make.
+The GUI tests require a graphical desktop.
+
+CLEANING THE BUILD
+
+    gmake clean
+
+Removes compiled and generated files, and renames Makefile to Makefile.old.
+To remove the generated makefile as well, run realclean directly instead:
+
+    gmake realclean
+
+If clean has already been run, use:
+
+    gmake -f Makefile.old realclean
+
+Makefile.PL and myConfig are source files and must remain. To build again:
+
+    perl Makefile.PL
+    gmake
+
+Use make instead of gmake where appropriate for your Perl installation.

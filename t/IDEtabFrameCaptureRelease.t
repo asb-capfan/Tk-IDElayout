@@ -17,7 +17,8 @@ use Tk::Text;
 # With nothing on the command line, the script will quit after the text completes
 my $dontExit = shift @ARGV;
 
-require 'testTextEdit'; # get the syntax highlighting text edit subs
+use FindBin;
+require "$FindBin::Bin/../eg/lib/testTextEdit.pl"; # get the syntax highlighting text edit subs
 
 print "1..1\n";
 

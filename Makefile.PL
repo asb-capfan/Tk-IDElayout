@@ -1,6 +1,7 @@
 use 5.6.0;
 use Cwd;
 use Config;
+use File::Find;
 no  lib '.';
 use ExtUtils::MakeMaker;
 BEGIN {
@@ -83,10 +84,22 @@ $ptkPath =~ s/\/Lang\.h$//g;
 
 
 
+my %pm;
+find(sub {
+    return unless /\.pm$/;
+    my $source = $File::Find::name;
+    (my $target = $source) =~ s{^lib/}{};
+    $pm{$source} = '$(INST_LIB)/' . $target;
+}, 'lib');
+
 Tk::MMutil::TkExtMakefile(
     'VERSION'  => $VERSION,
     'XS_VERSION' => $VERSION,
     'EXE_FILES' => [],
+    'PM' => \%pm,
+    'XS' => { 'src/CaptureRelease.xs' => 'src/CaptureRelease.c' },
+    'clean' => { FILES => 'CaptureRelease_def.old CaptureRelease.c CaptureRelease.xsc src/CaptureRelease.xsc' },
+    'depend' => { 'CaptureRelease$(OBJ_EXT)' => 'src/WmCaptureRelease.h' },
     'NAME'     => 'Tk::CaptureRelease',
     'LICENSE'  => 'perl_5',
     'META_MERGE' => {
@@ -108,9 +121,9 @@ Tk::MMutil::TkExtMakefile(
     'DIR'      => [reverse(sort(keys %$dir))],
     'DISTNAME' => "Tk-IDElayout",
     'DEFINE'   => $mydefine,
-    'INC'    => "-I$ptkPath",
+    'INC'    => "-I$ptkPath -Isrc",
     'LIBS'    => \@libs,
-    'OBJECT'  => '$(O_FILES)'. " $TkLibPath", # Tk Lib path will be the Tk library on Unix, blank for win32
+    'OBJECT'  => 'CaptureRelease$(OBJ_EXT) WmCaptureRelease$(OBJ_EXT)'. " $TkLibPath", # Tk Lib path will be the Tk library on Unix, blank for win32
     'CONFIGURE_REQUIRES' => {
         'ExtUtils::MakeMaker' => '6.52',
         'Tk::MMutil' => 0,
@@ -123,30 +136,6 @@ Tk::MMutil::TkExtMakefile(
     @macro,
 );
 
-
-sub MY::post_initialize {
-    my ($self) = @_;
-    my ($ret) = '';
-    my %files = ();
-    my $dir = $self->catdir('$(INST_ARCHLIBDIR)','Tk');
-    my $name;
-    foreach $name (grep /(%|\.q4|\.bck|\.old)$/,keys %{$self->{PM}}) {
-        delete $self->{PM}->{$name};
-    }
-    # delete $self->{PM}->{'Tk/Config.pm'};
-    # $self->{PM}->{'Tk/Config.pm'} = $self->catfile($dir,'Config.pm');
-    # $files{'typemap'} = 1;
-    foreach $name ($self->lsdir(".")) {
-        next if ($name =~ /^\./);
-        next unless (-f $name);
-        $files{$name} = 1 if ($name =~ /\.[tm]$/);
-        $files{$name} = 1 if ($name =~ /\.def$/);
-    }
-    foreach $name (sort(@{$self->{H}},keys %files)) {
-        $self->{PM}->{$name} = $self->catfile($dir,$name);
-    }
-    $ret;
-}
 
 sub needs_Test {
     my $file = shift;
@@ -185,6 +174,16 @@ sub MY::test {
 sub MY::postamble {
     '
 
+
+CaptureRelease$(OBJ_EXT) : src/CaptureRelease.c src/WmCaptureRelease.h
+	$(CCCMD) $(CCCDLFLAGS) "-I$(PERL_INC)" $(PASTHRU_DEFINE) $(DEFINE) $(GCCOPT) src/CaptureRelease.c
+
+src/CaptureRelease.c : src/CaptureRelease.xs $(XSUBPPDEPS)
+	$(XSUBPPRUN) $(XSPROTOARG) $(XSUBPPARGS) $(XSUBPP_EXTRA_ARGS) src/CaptureRelease.xs > src/CaptureRelease.xsc
+	$(MV) src/CaptureRelease.xsc src/CaptureRelease.c
+
+WmCaptureRelease$(OBJ_EXT) : src/WmCaptureRelease.c src/WmCaptureRelease.h
+	$(CCCMD) $(CCCDLFLAGS) "-I$(PERL_INC)" $(PASTHRU_DEFINE) $(DEFINE) $(GCCOPT) src/WmCaptureRelease.c
 
 Makefile     : myConfig
 

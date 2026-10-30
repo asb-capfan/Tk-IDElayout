@@ -6,7 +6,7 @@ inc/
 Build
 !Build/
 Build.bat
-/CaptureRelease.c
+/src/CaptureRelease.c
 /*.gz
 .last_cover_stats
 /Makefile
@@ -21,3 +21,6 @@ nytprof.out
 *.bs
 /_eumm/
 /.vscode/
+/CaptureRelease.def
+/CaptureRelease_def.old
+/src/CaptureRelease.xsc

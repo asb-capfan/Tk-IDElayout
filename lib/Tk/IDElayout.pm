@@ -87,7 +87,7 @@ like I<Eclipse> or I<Microsoft Visual Studio>.
 
 B<Features:>
 
-See I<Screenshots.pdf> in the source distribution for some screenshots demonstrating some of these features.
+See I<doc/Screenshots.pdf> in the source distribution for some screenshots demonstrating some of these features.
 
 =over 1
 

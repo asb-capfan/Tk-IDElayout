@@ -2,6 +2,9 @@
 
 
 # Highlight text pattern, read from _DATA_ and the end of the file
+use File::Basename qw(dirname);
+use File::Spec;
+my $SOURCE_ROOT = File::Spec->rel2abs(File::Spec->catdir(dirname(__FILE__), '..', '..'));
 my $HIGHLIGHT_PATTERNS;
 
 
@@ -10,7 +13,14 @@ sub createTextWindow{
 	my $mw = shift;
 	my $filename = shift;
 	
-	open(INFILE, $filename) or die("Can't open filename '$filename'\n");
+	my %examples = (
+            TabsDragDemo => 'tabs-drag.pl',
+            CaptureReleaseTest => 'capture-release.pl',
+        );
+        my $path = exists $examples{$filename}
+            ? File::Spec->catfile($SOURCE_ROOT, 'eg', $examples{$filename})
+            : File::Spec->catfile($SOURCE_ROOT, 'lib', 'Tk', $filename);
+        open(INFILE, $path) or die("Can't open filename '$filename'\n");
 	
 	# Widgets need containers to properly work with Tk::CaptureRelease
 	#   i.e. bare widgets don't work.

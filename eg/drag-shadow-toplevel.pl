@@ -1,3 +1,7 @@
+#!/usr/bin/env perl
+use FindBin;
+use lib "$FindBin::Bin/../blib/arch", "$FindBin::Bin/../blib/lib", "$FindBin::Bin/../lib";
+
 ### Test for the DragShadow Widget #########
 ###
 ###  Expected Results:
@@ -7,7 +11,7 @@
 ###
 
 use Tk;
-use Tk::DragShadowToplevel;
+use Tk::IDEdragShadowToplevel;
 
 my $mw = new MainWindow ();
 
@@ -47,7 +51,7 @@ $mw->bind('<ButtonPress-1>', sub{
 	my ($rootx,$rooty) = ( $Frame->rootx, $Frame->rooty);
 	($offsetX, $offsetY) = ($x-$rootx, $y-$rooty);
 	$geometry = $Frame->reqwidth."x".$Frame->reqheight."+".$Frame->rootx."+".$Frame->rooty;
-	$widget = $mw->DragShadowToplevel(-geometry => $geometry);
+	$widget = $mw->IDEdragShadowToplevel(-geometry => $geometry);
 	
 }
 );

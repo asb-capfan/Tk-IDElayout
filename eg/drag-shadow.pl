@@ -1,3 +1,7 @@
+#!/usr/bin/env perl
+use FindBin;
+use lib "$FindBin::Bin/../blib/arch", "$FindBin::Bin/../blib/lib", "$FindBin::Bin/../lib";
+
 ### Test for the DragShadow Widget #########
 ###
 ###  Expected Results:

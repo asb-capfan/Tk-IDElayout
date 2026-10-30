@@ -3,7 +3,8 @@ use warnings;
 use Test::More;
 use Graph::Directed;
 use FindBin;
-require "$FindBin::Bin/../IDElayout.pm";
+use lib "$FindBin::Bin/../lib";
+use Tk::IDElayout;
 
 {
     package LayoutProbe;
