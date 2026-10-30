@@ -15,7 +15,7 @@ Tk::IDEpanedwindow - Subclass of L<Tk::Panedwindow> to Control Pane Resize Behav
     # Create two frames to insert
     my $label1 = $panedwidnow->Label(-text => "This is the\nleft side", -background => 'yellow');
     my $Frame2 = $panedwidnow->Frame();
-    
+
     # Insert the frames, with expand factors = 1 (both frames will grow/shrink with the size
     #       of the window)
     $pwH->add($label1, -expandfactor => 1, $Frame2, -expandfactor => 1);
@@ -28,7 +28,7 @@ that controls how the paned-windows are resized when the overall widget is resiz
 
 The parent class L<Tk::Panedwindow> only changes the last pane when the entire widget is resized. 
 Using the I<-expandfactors> option of this widget, you can control how each paned-window is resized when the overall widget is resized.
-	
+
 Note: The idea for the I<-expandfactors> option is borrowed from the TCL/TK widget I<TixPanedWindow>.
 
 =head1 OPTIONS
@@ -40,7 +40,7 @@ In addition to the options from the parent class L<Tk::Panedwindow>, this widget
 =item expandfactors
 
 Array ref of expand factors to use for each pane in the widget.
-        
+
 Each Expand Factor must be a non-negative number. The default value is 0. 
 The expand/shrink factor is used to calculate how much each pane should grow or shrink when the size of the PanedWindow
 main window is changed. When the main window expands/shrinks by n pixels, 
@@ -53,7 +53,7 @@ Note: The behavior of this I<-expandfactors> option is borrowed from the TCL/TK 
 =item fractSizes
 
 Array ref of fractional (i.e. less than one) sizes left over from the last resize of the pane frames.
-        
+
 Even though frame sizes are number of pixels (integers), we keep track of the fractional part of the calculated
 frame sizes from resize-event to resize-event. This keeps the sizes of the frames in proportion to each other better
 than throwing away the fractional part would.
@@ -171,7 +171,7 @@ sub Populate {
 =head2 add
 
 Over-ridden add method add a new widget to the collection managed by the L<Tk::IDEpanedwindow>.
-        
+
 This method adds a -expandfactor option to the normal options recognized by the parent L<Tk::Panedwindow>. 
 
 B<Usage:>
@@ -281,7 +281,7 @@ sub add{
 =head2 forget
 
 Over-ridden forget method to delete a widget from the paned-window.
-        
+
 This deletes the widget from our own I<slaves> list before calling the parent method.
 
 B<Usage:>
@@ -330,11 +330,11 @@ sub forget{
 =head2 slaves
 
 Gets (and optionally sets) the slaves attribute. 
-        
+
 B<Usage:>
 
 	my @slaves = $self->slaves();    # Get slaves
-	
+
 	$self->slaves(@slaves);          # Set slaves
 
 
@@ -360,13 +360,13 @@ sub slaves{
 
 Internal method to get / calculate the new widget Sizes (Width or height) of a panewindow widget,
 based on total pw size, widget sizes, and expand factors.
-        
+
 This is called when the size of the panedwindow widget changes.
 
 B<Usage:>
 
    @newSizes = $self->_getNewSizes($newSize, $sizes);
-   
+
         where:   $newSize:   Total new size of the panewindow widget
                                (Along the paned direction)
                  $sizes:     Array ref of old sizes (i.e. not yet adjusted
@@ -450,7 +450,7 @@ Method to adjust the sizes of each pane in the paned-window direction.
 B<Usage:>
 
    $self->adjustSizes($newSizes);
-   
+
         where:   $newSizes:   Array ref of new sizes  for each window
                                  managed by the panedwindow.
 

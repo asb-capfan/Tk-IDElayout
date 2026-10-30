@@ -9,7 +9,7 @@ Tk::IDEdragShadowToplevel - Shadow Outline for Showing Drag Motion or Drop Targe
     $TabbedFrame = $widget->IDEdragShadowToplevel
        (
         -geometry => "30x30+10+30", # Format widthxheight+x+y
- 	
+
        );
 
 
@@ -167,9 +167,9 @@ sub geometry{
 Moves the whole widget to a new location on the screen.
 
 B<Usage:>
-     
+
 	$widget->moveToplevelWindow($x,$y);
-	
+
 	where:
 	  $x/$y  are the x/y screen coords to move the upper right
 	         corner of the widget to.
@@ -211,9 +211,9 @@ the widget visible again.
 
 
 B<Usage:>
-     
+
 	$widget->deiconify;
-	
+
 
 =cut
 
@@ -239,9 +239,9 @@ Withdraw (i.e. withdraw from the screen) the whole widget.
 
 
 B<Usage:>
-     
+
 	$widget->withdraw;
-	
+
 
 =cut
 

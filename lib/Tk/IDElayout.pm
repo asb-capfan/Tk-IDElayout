@@ -9,7 +9,7 @@ B<Simple Example>: (See t/simpleIDElayout2.t in the source distribution for comp
 
         #### This example creates two IDEtabFrames for managing with IDElayout #####
         my $TOP = MainWindow->new;
-        
+
         ###  Create layout structures ###
         ###    This structure has the PaneWindow (P1) at the top level, 
         ###      and the two IDEtabFrames next lower level.
@@ -38,45 +38,45 @@ B<Simple Example>: (See t/simpleIDElayout2.t in the source distribution for comp
            [ 'P1', 'Tab1'],
            [ 'P1', 'Tab2'],
            );
-        
-        
+
+
         #################### Create Widgets ##################################
         # We will use the same default IDEtabFrame config that the IDElayout widget uses
         my $IDEtabFrameConfig = Tk::IDElayout->defaultIDEtabFrameConfig();
-        
+
         ###  TabFrame 1 ###
         my $dtf = $TOP->IDEtabFrame( @$IDEtabFrameConfig);      
         $dtf->configure(-height => 400);
-        
-        
+
+
         ###  TabFrame 2 ###     
         my $dtf2 = $TOP->IDEtabFrame( @$IDEtabFrameConfig);
-         
+
         ######### Populate widgets hash with the two TabFrames created ######
         my %widgets = ( 'Tab1' => $dtf,
                         'Tab2' => $dtf2,
                         );
-        
-        
+
+
         # Create simple menubar
         my $MenuBar = $TOP->Frame(-class => 'Menubar'); # We don't pack this, it will be packed by IDElayout
-       
-        
+
+
         # Create simple statusLine
         my $statusText = "This is statusLine Text";
         my $statusLine = $TOP->Label(-textvariable => \$statusText, -anchor => 'w');
-        
-        
+
+
         # Structure Created, now buld the Tk::IDElayout
-        
+
         my $layout = $TOP->IDElayout(
                 -widgets => \%widgets,
                 -frameStructure => { nodes => \@nodes,  edges => \@edges},
                 -menu    => $MenuBar,
                 -statusLine => $statusLine,
                 );
-        
-        
+
+
         $layout->pack(-side => 'top', -fill => 'both', -expand => 'yes');
 
 
@@ -94,12 +94,12 @@ See I<doc/Screenshots.pdf> in the source distribution for some screenshots demon
 =item *
 
 Layout and management of subwidgets/frames similar to an IDE.
-	
+
 =item *
 
 Resizable panes. Separate frames/widgets in the top-level window can be resized by dragging
 the separator border between the frames.
-	
+
 =item *
 
 Support for Tabbed-Frames (using of subclass of L<Tk::DynaTabFrame>, where each tab can be dragged/dropped;
@@ -116,7 +116,7 @@ to another tabframe in the IDE, or to a new separate window, or to "edge" ares i
 
 Hash ref representing the structure and layout of the frames managed by this widget. See L<FrameStructure Description>
 below for details on this structure.
-	
+
 This option, or I<frameGraph> below is required to be supplied to the widget when it is created.
 
 =item frameGraph
@@ -134,11 +134,11 @@ Hashref (key-ed by name) of subwidgets managed by this widget.
 =item menu
 
 Required menu widget that will displayed at the top of the top-level window.
-	
+
 =item toolbar
 
 Optional L<Tk::ToolBar> widget to display below the I<menu> above.
-	
+
 =item statusLine
 
 Optional status-line frame to display at the bottom of the top-level window. A status-line is typically used
@@ -173,7 +173,7 @@ If not supplied, this defaults to:
         -noraisedCloseButtonbg => 'white',
         -noraisedCloseButtonActivefg => 'red',
  ]
- 
+
 =item IDEpanedwindowConfig
 
 Optional array ref of L<Tk::IDEpanedwindow> options to be used when creating new L<Tk::IDEpanedwindow> widgets.
@@ -210,7 +210,7 @@ Defaults to 0.
 
 The structure of the frames managed by this widget is defined by the I<frameStructure> option. This is a hash ref
 with two entries, I<nodes> and I<edges>, which together describe a L<Graph::Directed> structure.
-	
+
 =head2 Node Entry
 
 The node entry is an array ref containing descriptions for each node/frame managed by the widget. Each node entry is a 
@@ -221,7 +221,7 @@ hash ref with the following entries:
 =item type
 
 Node Type. Valid entries are I<panedWindow> or I<widget>. 
-	
+
 I<panedWindow> nodes represent L<Tk::IDEpanedWindow> widgets that manage one or more subwidgets.
 
 I<widget> nodes represent normal Tk widgets that are managed by a L<Tk::IDEpanedWindow> widget.
@@ -229,7 +229,7 @@ I<widget> nodes represent normal Tk widgets that are managed by a L<Tk::IDEpaned
 =item name
 
 Name of the node. If I<type> above is 'widget', this should correspond to a entry in the I<widgets> option.
-	
+
 =item dir
 
 Direction (H/V for Horizontal/Vertical) of the L<Tk::IDEpanedWindow> panes. Only applies for the I<panedWindow> type.
@@ -256,11 +256,11 @@ See the L<Tk::IDEpanedwindow> docs for details.
 
 The edges entry represents the edges (or connections) between the nodes described by the I<nodes> entry. It is
 a list of 2-element arrays. Each 2-element array represents a connection between nodes.
-	
+
 =head2 Example Structure
 
 The following is an example of a simple I<frameStructure>.
-	
+
   my $frameStructure  = {
       nodes = [
 	  {  name => 'P1', 
@@ -283,9 +283,9 @@ The following is an example of a simple I<frameStructure>.
 	   [ 'P2', 'Frame 3'],
         ]
    };
-   
+
 The above will result in the following frame structure (as a L<Graph::Directed> object in the I<frameGraph> option).
-	
+
 	+--------+     +--------+     +--------+
 	|   P1   | --> |   P2   | --> | Frame2 |
 	+--------+     +--------+     +--------+
@@ -295,14 +295,14 @@ The above will result in the following frame structure (as a L<Graph::Directed> 
 	+--------+     +--------+
 	| Frame1 |     | Frame3 |
 	+--------+     +--------+
-	
+
 
 The top-level PanedWindow, P1, manages Frame1 and another PanedWindow, P2, in the horizontal direction
 
 The PanedWindow P2 manages Frame2 and Frame3 in the vertical direction.
-	
+
 The actual layout on the screen will look something like this.
-        
+
        +---------------+----------------+
        |               |     Frame2     |
        |    Frame1     +----------------|
@@ -320,7 +320,7 @@ L<Tk::Frame> object that holds the menu bar at the top of the main window.
 =item mainPW
 
 L<Tk::IDEanedWindow> object used for main display of widgets.
-	
+
 =item toolbarFrame
 
 L<Tk::Frame> object that holds the toolbar (if used).
@@ -328,7 +328,7 @@ L<Tk::Frame> object that holds the toolbar (if used).
 =item statusLineFrame
 
 L<Tk::Frame> object that holds the status-line widget.
-	
+
 =back
 
 =head1 ATTRIBUTES
@@ -340,15 +340,15 @@ L<Tk::Frame> object that holds the status-line widget.
 L<Tk::Frame> object used to indicate drop target areas. This will appear as a horizontal or vertical Bar on the
 sides or top/bottom of a frame to indicate where a drag/drop operation can be dropped.
 
-        
+
 =item currentFrame
 
 Current frame that the mouse pointer is over during a drag/drop operation.
-        
+
 =item currentSide
 
 Current side of the frame (e.g. left, right, top, bot) that the mouse pointer is over during a drag/drop operation.
-        
+
 =item lastSide
 
 The last side of the frame (e.g. left, right, top, bot) that the mouse pointer was over during a drag/drop operation.
@@ -736,7 +736,7 @@ the frame (if any) (and the bounding box coord) that the x/y position is within
 B<Usage:>
 
    my ($frameName, $x1,$y1, $x2,$y2) = $self->findFrame($x,$y);
-   
+
    returns an empty list if x/y position is not within any frame
 
 
@@ -823,7 +823,7 @@ B<Usage:>
             $pointery   y coord of the current pointer
 	    $frameName  Name of frame
 	    $x1/y1/x2/y2 Frame Coords
-	    
+
     Returns $side (top/bot/left/right) if we
     are close to a side.
 
@@ -1239,7 +1239,7 @@ sub addWidgetAtSide{
 
 Method create a unique Paned-Window name from the existing Paned-Window widgets being managed
 by this widget. 
-        
+
 For example, if there are Paned-Window P1, P2, P3 being managed, then this method will return P4.
 
 B<Usage:>
@@ -1346,7 +1346,7 @@ rid of it.
 B<Usage:>
 
    $self->simplifyAfterDelete($pwName, $widgetName);
-     
+
    where:
       $pwName:      Parent panedwindow name of the widget just deleted
       $widgetName:  Name of the widget just deleted
@@ -1458,13 +1458,13 @@ sub simplifyAfterDelete{
 
 Debug-only method to display the structure of the managed widgets as a Directed Graph using L<GraphViz>
 and L<Tk::GraphVizViewer>.
- 
+
 Requires the L<Tk::GraphVizViewer> widget.
 
 B<Usage:>
 
    $self->displayStruct($title);
-   
+
       where: $title: Optional title to give the display window
 
 
@@ -1512,7 +1512,7 @@ sub displayStruct{
 =head2 Drop
 
 Method called when accepting a drop from a drag-drop operation.
-        
+
 Creates and populates a new L<Tk::IDEtabFrame> widget to hold the dragged widget.
 
 
@@ -1588,7 +1588,7 @@ sub Drop{
 
 Cleas method that returns the default L<Tk::IDEtabFrame> options that will be used
 to set the -IDEtabFrameConfig options if not supplied.
-        
+
 This is broken out as a class method so the defaults can be used for initial setup of
 the L<Tk::IDEtabFrame> widgets for simple example scripts.
 
@@ -1627,7 +1627,7 @@ sub defaultIDEtabFrameConfig{
 =head2 adjustGeom
 
 Method to resize the main window of the GUI to the requested width/height of the window. 
-        
+
 This is called at the end of the I<deleteWidget> and I<addWidgetAtSide> methods if the I<ResizeOnReconfig>
 option is 1.
 

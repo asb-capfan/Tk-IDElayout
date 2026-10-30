@@ -83,11 +83,11 @@ Set a location in the dropbox to a value. This is similar to setting the value o
 B<Usage:>
 
  $DropBox->set($key, $value)
- 
+
   where:
      $key: Location (i.e. key) in the dropbox to store
      $value: Data to store in the dropbox.
-     
+
 
 =cut  
 
@@ -112,11 +112,11 @@ Get the data in a location in the dropbox. This is similar to getting the value 
 B<Usage:>
 
  my $value = $DropBox->get($key);
- 
+
   where:
      $key: Location (i.e. key) in the dropbox to store
      $value: Data to retreived in the dropbox.
-     
+
 
 =cut  
 
@@ -141,11 +141,11 @@ Delete the data in a location in the dropbox. This is similar to deleting the va
 B<Usage:>
 
  my $value = $DropBox->delete($key);
- 
+
   where:
      $key: Location (i.e. key) in the dropbox to store
      $value: Data deleted in the dropbox.
-     
+
 
 =cut  
 

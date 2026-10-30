@@ -24,7 +24,7 @@ Usage is the same as normal Tk drag/drop usage, except when creating
 the dropsite, use:
 
  use Tk::IDElayoutDropSite;
- 
+
  my $dropSite = $widget->IDElayoutDropSite( ... );
 
 =head1 ATTRIBUTES
@@ -109,7 +109,7 @@ sub Over{
 =head2 Enter
 
 Overridden Enter Method.
-        
+
 This turns on the frame-side indicator that shows which frame is the active drop target.
 
 
@@ -131,7 +131,7 @@ sub Enter
 =head2 Leave
 
 Overridden Leave Method.
-        
+
 This turns off the frame-side indicator that shows which frame is the active drop target.
 
 

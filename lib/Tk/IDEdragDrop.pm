@@ -42,7 +42,7 @@ Usage is the same as normal Tk drag/drop usage, except when creating
 the Drag-Drop Token, use:
 
  use Tk::IDEdragDrop;
- 
+
  my $dragToken = $widget->IDEdragDrop( ... );
 
 =cut

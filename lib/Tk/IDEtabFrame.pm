@@ -27,26 +27,26 @@ Tk::IDEtabFrame - Tabbed Notebook Widget for a IDE Environment
         -textalign => 1,
         -tiptime => 600,
         -tipcolor => 'yellow',
-	
+
 	# Additional Options added by IDEtabFrame
 	-raisedfg => 'black',
 	-raisedActivefg => 'red',
-	
+
 	-raisedCloseButtonfg => 'black',
 	-raisedCloseButtonbg => 'lightgrey',
 	-raisedCloseButtonActivefg => 'red',
 	-raisedCloseButtonActivebg => 'white',
-	
+
 	-noraisedfg => 'grey60',
 	-noraisedActivefg => 'black',
-	
+
 	-noraisedCloseButtonfg => 'lightgrey',
 	-noraisedCloseButtonbg => 'white',
 	-noraisedCloseButtonActivefg => 'red',
 	-noraisedCloseButtonActivebg => 'white',
-	
+
         [normal frame options...],
-	
+
        );
 
 
@@ -56,7 +56,7 @@ Tk::IDEtabFrame - Tabbed Notebook Widget for a IDE Environment
 This is a subclass of the L<Tk::DynaTabFrame> widget that adds some additional
 options that affect the appearance and behaviour for use as part of a Integrated
 Development Environment (IDE), similar to I<Eclipse>, etc.
-	
+
 =head1 DRAG-DROP SUPPORT
 
 Tabs can be dragged to the tab-frame area of other (or the same) IDEtabFrame widget.
@@ -126,9 +126,9 @@ Active background color (i.e. the color when the mouse hovers over it) of the I<
 =item defaultFrameConfig
 
 Array Ref of default options used to create new tab-frames. Defaults to 
-  
+
   (-relief => 'flat', -bg => 'steelblue4', -bd => 2)
-  
+
 =item lastTabDeleteCallback
 
 Optional Callback (i.e. subref) to execute after when the last tab is deleted. This can be used to perform cleanup, remove/unpack the
@@ -768,7 +768,7 @@ sub drop{
 =head2 toolWindowConfigure
 
 Method to configure a "toolwindow" so that it can be dragged back into a tab window. 
-	
+
 Bindings are setup so moving the window just moves a frame.
 
 B<Usage:>
@@ -886,7 +886,7 @@ sub toolWindowConfigure{
 =head2 endDragTW
 
 Method called when a Tool-Window drag operation ends. 
-	
+
 If not dropping back into a tab-frame, moves the toolwindow to the dragged
 position.
 
@@ -934,7 +934,7 @@ sub endDragTW {
 =head2 TabRemove
 
 Overridden TabRemove method.
-        
+
 This calls the parent I<TabRemove> and the calls the I<lastTabDeleteCallback> if all the tabs have been deleted
 
 =cut
@@ -957,12 +957,12 @@ sub TabRemove {
 =head2 tabclose
 
 Overridden tabclose method.
-        
+
 If the tabclose option is 1, this installs a callback to our TabRemove, rather than the default I<Tk::DynaTabFrame::TabRemove>. 
 
 Because L<Tk::DynaTabFrame> calls its I<TabRemove> directly (Using \&TabRemove), rather than by a method call, this tabclose method is
 needed to call our overriden I<TabRemove> method.
-        
+
 The default code ref installed here is called when the close button pressed on the tab.
 It explicitly destroys the widget contained in the tab. This is needed because the widgets in IDElayout
 are created as childs of the main widget, and not childs of the IDEtabframe widget.

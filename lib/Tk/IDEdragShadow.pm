@@ -9,7 +9,7 @@ Tk:IDEdragShadow - Shadow Outline for Showing Drag Motion or Drop Targets
     $TabbedFrame = $widget->DragShadow
        (
         -geometry => "30x30+10+30", # Format widthxheight+x+y
- 	
+
        );
 
 
