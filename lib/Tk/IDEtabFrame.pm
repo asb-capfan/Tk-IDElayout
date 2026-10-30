@@ -1,60 +1,30 @@
-=head1 NAME 
+=head1 NAME
 
 Tk::IDEtabFrame - Tabbed Notebook Widget for a IDE Environment
 
 =head1 SYNOPSIS
 
+    use strict;
+    use warnings;
+    use Tk;
     use Tk::IDEtabFrame;
+    use Tk::Font;
 
-    $TabbedFrame = $widget->IDEtabFrame
-       (
-        # Tk::DynaTabFrame Options:
-        -font => $font,
-        -raisecmd => \&raise_callback,
-        -raisecolor => 'green',
-        -tabclose => sub { 
-                my ($dtf, $caption) = @_; 
-                $dtf->delete($caption);
-                },
-        -tabcolor => 'yellow',
-        -tabcurve => 2,
-        -tablock => undef,
-        -tabpadx => 5,
-        -tabpady => 5,
-        -tabrotate => 1,
-        -tabside => 'nw',
-        -tabscroll => undef,
-        -textalign => 1,
-        -tiptime => 600,
-        -tipcolor => 'yellow',
-
-	# Additional Options added by IDEtabFrame
-	-raisedfg => 'black',
-	-raisedActivefg => 'red',
-
-	-raisedCloseButtonfg => 'black',
-	-raisedCloseButtonbg => 'lightgrey',
-	-raisedCloseButtonActivefg => 'red',
-	-raisedCloseButtonActivebg => 'white',
-
-	-noraisedfg => 'grey60',
-	-noraisedActivefg => 'black',
-
-	-noraisedCloseButtonfg => 'lightgrey',
-	-noraisedCloseButtonbg => 'white',
-	-noraisedCloseButtonActivefg => 'red',
-	-noraisedCloseButtonActivebg => 'white',
-
-        [normal frame options...],
-
-       );
-
-
+    my $mw = MainWindow->new;
+    my $tabs = $mw->IDEtabFrame(-tabclose => 1, -raisedfg => 'black');
+    $tabs->pack(-expand => 1, -fill => 'both');
+    for my $caption (qw(First Second)) {
+        my $tab = $tabs->add(-caption => $caption, -label => $caption);
+        my $content = $mw->Frame;
+        $content->Label(-text => "$caption tab")->pack(-padx => 30, -pady => 30);
+        $content->pack(-in => $tab, -expand => 1, -fill => 'both');
+    }
+    MainLoop;
 
 =head1 DESCRIPTION
 
 This is a subclass of the L<Tk::DynaTabFrame> widget that adds some additional
-options that affect the appearance and behaviour for use as part of a Integrated
+options that affect the appearance and behaviour for use as part of an Integrated
 Development Environment (IDE), similar to I<Eclipse>, etc.
 
 =head1 DRAG-DROP SUPPORT
@@ -62,7 +32,7 @@ Development Environment (IDE), similar to I<Eclipse>, etc.
 Tabs can be dragged to the tab-frame area of other (or the same) IDEtabFrame widget.
 This will move the dragged tab and widget to the new IDEtabFrame widget.
 
-Tabs can also be dragged outside the widget to become separate I<Tool-Windows>. These windows can be dragged from 
+Tabs can also be dragged outside the widget to become separate I<Tool-Windows>. These windows can be dragged from
 a drag-area at the top of the I<Tool-Window> and dropped
 back into a IDEtabFrame widget.
 
@@ -125,17 +95,18 @@ Active background color (i.e. the color when the mouse hovers over it) of the I<
 
 =item defaultFrameConfig
 
-Array Ref of default options used to create new tab-frames. Defaults to 
+Array Ref of default options used to create new tab-frames. Defaults to
 
   (-relief => 'flat', -bg => 'steelblue4', -bd => 2)
 
 =item lastTabDeleteCallback
 
-Optional Callback (i.e. subref) to execute after when the last tab is deleted. This can be used to perform cleanup, remove/unpack the
+Optional Tk callback, supplied as a subroutine or callback array reference,
+called after the last tab is removed. This can be used to perform cleanup, remove/unpack the
 tabframe from the parent display, etc.
 
 
-=back 
+=back
 
 =head1 ATTRIBUTES
 
@@ -148,7 +119,7 @@ L<Tk::Photo> object of the image displayed when dragging data. Optional.
 =item dropSite
 
 L<Tk::DropSite> object of attached to the tab frame for the notebook widget. This provides a drop
-target for dropping other widgets into the notebook as new tabs. 
+target for dropping other widgets into the notebook as new tabs.
 
 =item dragShadow
 
@@ -156,7 +127,7 @@ L<Tk::IDEdragShadow> object used to show drag/drop drop targets.
 
 =item endDragActions
 
-Array Refs of callbacks to execute at the end of a drag operation. Typically this will be set to delete or 
+Array Refs of callbacks to execute at the end of a drag operation. Typically this will be set to delete or
 add a tab to the dialog after a drag operation has been completed.
 
 =item dragging
@@ -165,18 +136,11 @@ Flag = 1 if we are currently in a drag operation for this object.
 
 =back
 
-=head1 Class Data
+=head1 DRAG-DROP STORAGE
 
-=over 1
-
-=item Dropbox
-
-Hash of objects. Since the Tk Drag/Drop mechanism only supports passing strings around, this hash
-is used as a "dropbox" where the source can put a object in this hash, key'ed by a text name. This
-name is passed to the target (i.e. the drop location). The target can use the string to lookup the
-real object in this hash.
-
-=back
+Dragged objects are stored temporarily in the singleton
+L<Tk::IDElayout::DropBox>. Tk drag/drop passes a string key to the target,
+which retrieves the object from that shared store.
 
 =head1 Methods
 
@@ -277,7 +241,7 @@ sub lastTabDeleteCallback{
 
 =head2 TabCreate
 
-Over-ridden method to create tabs. 
+Overridden method to create tabs.
 
 Calls the parent tabCreate, then applies extra look options
 
@@ -375,7 +339,7 @@ sub TabCreate{
 
 =head2 TabRaise
 
-Over-ridden method to raise a tab 
+Overridden method to raise a tab
 
 Calls the parent TabRase, then applies extra look options
 
@@ -767,7 +731,7 @@ sub drop{
 
 =head2 toolWindowConfigure
 
-Method to configure a "toolwindow" so that it can be dragged back into a tab window. 
+Method to configure a "toolwindow" so that it can be dragged back into a tab window.
 
 Bindings are setup so moving the window just moves a frame.
 
@@ -885,7 +849,7 @@ sub toolWindowConfigure{
 
 =head2 endDragTW
 
-Method called when a Tool-Window drag operation ends. 
+Method called when a Tool-Window drag operation ends.
 
 If not dropping back into a tab-frame, moves the toolwindow to the dragged
 position.
@@ -935,7 +899,7 @@ sub endDragTW {
 
 Overridden TabRemove method.
 
-This calls the parent I<TabRemove> and the calls the I<lastTabDeleteCallback> if all the tabs have been deleted
+This calls the parent I<TabRemove> and then calls the I<lastTabDeleteCallback> if all the tabs have been deleted
 
 =cut
 
@@ -958,7 +922,7 @@ sub TabRemove {
 
 Overridden tabclose method.
 
-If the tabclose option is 1, this installs a callback to our TabRemove, rather than the default I<Tk::DynaTabFrame::TabRemove>. 
+If the tabclose option is 1, this installs a callback to our TabRemove, rather than the default I<Tk::DynaTabFrame::TabRemove>.
 
 Because L<Tk::DynaTabFrame> calls its I<TabRemove> directly (Using \&TabRemove), rather than by a method call, this tabclose method is
 needed to call our overriden I<TabRemove> method.

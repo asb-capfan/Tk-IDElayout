@@ -12,6 +12,18 @@ use Carp;
 
 Tk::IDElayout::DropBox -  IDElayout Helper class for Drag Drop Operations
 
+=head1 SYNOPSIS
+
+    use strict;
+    use warnings;
+    use Tk::IDElayout::DropBox;
+
+    my $dropbox = Tk::IDElayout::DropBox->instance;
+    $dropbox->set('example', { caption => 'Example tab' });
+    my $object = $dropbox->get('example');
+    print $object->{caption}, "\n";
+    $dropbox->delete('example');
+
 =head1 DESCRIPTION
 
 This is a simple I<Singleton> class that implements a simple I<DropBox> to help
@@ -30,7 +42,7 @@ to gain access to the one instance of the class.
 
 Internal method used to create the object.
 
-=cut  
+=cut
 
 sub _new{
 
@@ -57,7 +69,7 @@ B<Usage:>
   my $dropbox = Tk::IDElayout::DropBox->instance;
 
 
-=cut  
+=cut
 
 my $numberOfInstances = 0;
 my $DropBox;
@@ -89,7 +101,7 @@ B<Usage:>
      $value: Data to store in the dropbox.
 
 
-=cut  
+=cut
 
 
 sub set{
@@ -115,10 +127,10 @@ B<Usage:>
 
   where:
      $key: Location (i.e. key) in the dropbox to store
-     $value: Data to retreived in the dropbox.
+     $value: Data to retrieved in the dropbox.
 
 
-=cut  
+=cut
 
 
 sub get{
@@ -147,7 +159,7 @@ B<Usage:>
      $value: Data deleted in the dropbox.
 
 
-=cut  
+=cut
 
 
 sub delete{

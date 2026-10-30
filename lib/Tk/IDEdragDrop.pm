@@ -12,7 +12,7 @@ use base  qw( Tk::DragDrop);
 
 our($DEBUG);
 
-=head1 NAME 
+=head1 NAME
 
 Tk::IDEdragDrop - Tk::DragDrop subclass for IDE Drag/Drop Behavior
 
@@ -27,7 +27,7 @@ This is a L<Tk::DragDrop> derived widget with some additional features:
 The widget responds to button-release events when dragged outside the Tk window.
 
 For example, dragging a target outside the Tk window (e.g. onto the desktop) and releasing the mouse button
-doesn't leave the the Drag-Drop token in limbo, like the parent class. 
+doesn't leave the the Drag-Drop token in limbo, like the parent class.
 
 This feature is needed for the IDE so that windows can be dragged outside the main window (onto the desktop)
 and be reparented to a top-level window. (e.g. tabs from IDEtabFrame widget can be dragged to
@@ -37,6 +37,9 @@ the desktop to become top-level windows).
 
 
 =head1 SYNOPSIS
+
+The following is a fragment for an existing Tk drag/drop setup, not a
+standalone program. See L<Tk::IDElayout> for a complete application.
 
 Usage is the same as normal Tk drag/drop usage, except when creating
 the Drag-Drop Token, use:

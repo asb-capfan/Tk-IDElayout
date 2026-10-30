@@ -1,25 +1,33 @@
-=head1 NAME 
+=head1 NAME
 
 Tk::IDEdragShadowToplevel - Shadow Outline for Showing Drag Motion or Drop Targets
 
 =head1 SYNOPSIS
 
+    use strict;
+    use warnings;
+    use Tk;
     use Tk::IDEdragShadowToplevel;
 
-    $TabbedFrame = $widget->IDEdragShadowToplevel
-       (
-        -geometry => "30x30+10+30", # Format widthxheight+x+y
-
-       );
-
-
+    my $mw = MainWindow->new;
+    my $shadow = $mw->IDEdragShadowToplevel(-geometry => '150x100+100+100');
+    $mw->Button(-text => 'Move outline', -command => sub {
+        $shadow->MoveToplevelWindow(200, 200);
+    })->pack;
+    $mw->Button(-text => 'Hide outline', -command => sub {
+        $shadow->withdraw;
+    })->pack;
+    $mw->Button(-text => 'Show outline', -command => sub {
+        $shadow->deiconify;
+    })->pack;
+    MainLoop;
 
 =head1 DESCRIPTION
 
 This is a composite widget that implements a grey outline frame that can be used to show window shapes when
-dragging, or drop-target areas. 
+dragging, or drop-target areas.
 
-This differs from the releated L<Tk::IDEdragShadow> widget in that it acts like a top-level widget. It can be dragged
+This differs from the related L<Tk::IDEdragShadow> widget in that it acts like a top-level widget. It can be dragged
 all around the desktop. L<Tk::IDEdragShadow> is a subwidget of a Mainwindow/Toplevel and can't be moved/displayed outside of it's
 Mainwindow/Toplevel.
 
@@ -33,7 +41,7 @@ Mainwindow/Toplevel.
 Geometry of the outline frame, in the form C<widthxheight+x+y>.
 
 
-=back 
+=back
 
 =head1 Advertised Subwidgets
 
@@ -168,10 +176,10 @@ Moves the whole widget to a new location on the screen.
 
 B<Usage:>
 
-	$widget->moveToplevelWindow($x,$y);
+	$widget->MoveToplevelWindow($x,$y);
 
 	where:
-	  $x/$y  are the x/y screen coords to move the upper right
+	  $x/$y  are the x/y screen coords to move the upper left
 	         corner of the widget to.
 
 

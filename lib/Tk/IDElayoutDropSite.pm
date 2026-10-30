@@ -9,9 +9,9 @@ use strict;
 
 Construct Tk::Widget 'IDElayoutDropSite';
 
-=head1 NAME 
+=head1 NAME
 
-Tk::IDElayoutDropSite - Tk::DropSite widget with for the IDElayout Widget
+Tk::IDElayoutDropSite - Tk::DropSite subclass for the IDElayout widget
 
 =head1 DESCRIPTION
 
@@ -19,6 +19,9 @@ This is a L<Tk::DropSite> derived widget that handles drop-targets for the
 L<Tk::IDElayout> widget, which features some special drag/drop behavior.
 
 =head1 SYNOPSIS
+
+The following is a fragment for an existing Tk drag/drop setup, not a
+standalone program. See L<Tk::IDElayout> for a complete application.
 
 Usage is the same as normal Tk drag/drop usage, except when creating
 the dropsite, use:
@@ -48,7 +51,7 @@ Name of the current Frame that has been dragged over, as part of a drag-drop ope
 
 =head2 Over
 
-Overridden Over Method. 
+Overridden Over Method.
 
 This checks to see if we are dragging close to an edge of a frame. These edges are the drop targets for the
 IDElayout widget.

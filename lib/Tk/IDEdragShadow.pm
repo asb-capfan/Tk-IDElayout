@@ -1,18 +1,24 @@
-=head1 NAME 
+=head1 NAME
 
-Tk:IDEdragShadow - Shadow Outline for Showing Drag Motion or Drop Targets
+Tk::IDEdragShadow - Shadow Outline for Showing Drag Motion or Drop Targets
 
 =head1 SYNOPSIS
 
-    use Tk:IDEdragShadow;
+    use strict;
+    use warnings;
+    use Tk;
+    use Tk::IDEdragShadow;
 
-    $TabbedFrame = $widget->DragShadow
-       (
-        -geometry => "30x30+10+30", # Format widthxheight+x+y
-
-       );
-
-
+    my $mw = MainWindow->new;
+    $mw->geometry('300x200');
+    my $shadow;
+    $mw->after(500, sub {
+        $shadow = $mw->IDEdragShadow(-geometry => '150x100+20+20');
+    });
+    $mw->Button(-text => 'Hide outline', -command => sub {
+        $shadow->placeForget if defined $shadow;
+    })->pack;
+    MainLoop;
 
 =head1 DESCRIPTION
 
@@ -29,7 +35,7 @@ dragging, or drop-target areas.
 Geometry of the outline frame, in the form C<widthxheight+x+y>.
 
 
-=back 
+=back
 
 =head1 Advertised Subwidgets
 
