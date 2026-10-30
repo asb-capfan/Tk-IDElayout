@@ -1,4 +1,4 @@
-use 5.6.0;
+use 5.008;
 use Cwd;
 use Config;
 use File::Find;
@@ -95,6 +95,7 @@ find(sub {
 Tk::MMutil::TkExtMakefile(
     'VERSION'  => $VERSION,
     'XS_VERSION' => $VERSION,
+    'MIN_PERL_VERSION' => '5.008',
     'EXE_FILES' => [],
     'PM' => \%pm,
     'XS' => { 'src/CaptureRelease.xs' => 'src/CaptureRelease.c' },

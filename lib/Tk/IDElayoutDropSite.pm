@@ -1,4 +1,6 @@
 package Tk::IDElayoutDropSite;
+
+use 5.008;
 our ($VERSION) = ('0.37_02');
 
 use base  qw(Tk::DropSite);

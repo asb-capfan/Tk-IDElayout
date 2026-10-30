@@ -75,6 +75,8 @@ Array ref of L<Tk::Widget> objects in each frame of the panedwindow.
 =cut
 
 package Tk::IDEpanedwindow;
+
+use 5.008;
 our ($VERSION) = ('0.37_02');
 
 use Carp;

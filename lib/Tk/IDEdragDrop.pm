@@ -1,4 +1,6 @@
 package Tk::IDEdragDrop;
+
+use 5.008;
 require Tk::Toplevel;
 require Tk::Label;
 use Tk::IDEdragShadowToplevel;

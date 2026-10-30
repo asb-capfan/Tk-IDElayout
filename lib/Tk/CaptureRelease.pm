@@ -1,5 +1,7 @@
 package Tk::CaptureRelease;
 
+use 5.008;
+
 our ($VERSION) = ('0.37_02');
 
 use Tk;

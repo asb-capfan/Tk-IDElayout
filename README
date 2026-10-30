@@ -24,6 +24,10 @@ can be dragged/dropped; to another tabframe in the IDE, or to a new separate win
 or to "edge" ares in the mainwindow to create new tabframes.
 
 
+REQUIREMENTS
+
+Perl 5.8.0 or later is required.
+
 BUILDING AND INSTALLING THE WIDGET
 
 1. Uncompress and unpack the distribution

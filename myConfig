@@ -1,5 +1,5 @@
 # -*- cperl -*-
-require 5.00404;
+require 5.008;
 my $path = "$Config{'archlibexp'}/CORE/perl.h";
 die "Cannot find '$path' have you installed $^X?\n" unless (-r $path);
 print "$^X is installed in $Config{'archlibexp'} okay\n";

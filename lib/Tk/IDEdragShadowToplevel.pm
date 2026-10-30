@@ -55,6 +55,8 @@ None
 
 package Tk::IDEdragShadowToplevel;
 
+use 5.008;
+
 our ($VERSION) = ('0.37_02');
 
 use Carp;

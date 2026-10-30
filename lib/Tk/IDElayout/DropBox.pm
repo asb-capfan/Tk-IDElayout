@@ -1,4 +1,6 @@
 package Tk::IDElayout::DropBox;
+
+use 5.008;
 our ($VERSION) = ('0.37_02');
 
 use strict;
